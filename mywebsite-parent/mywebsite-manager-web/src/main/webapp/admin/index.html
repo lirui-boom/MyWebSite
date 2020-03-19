@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no"
+          name="viewport">
+    <title>LiLei</title>
+
+    <link rel="stylesheet" href="../dist/modules/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../dist/modules/ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="../dist/modules/fontawesome/web-fonts-with-css/css/fontawesome-all.min.css">
+
+    <link rel="stylesheet" href="../dist/modules/summernote/summernote-lite.css">
+    <link rel="stylesheet" href="../dist/modules/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="../dist/css/demo.css">
+    <link rel="stylesheet" href="../dist/css/style.css">
+
+    <script src="/angularjs/plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="/angularjs/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/angularjs/plugins/angularjs/angular.min.js"></script>
+    <script src="/angularjs/plugins/angularjs/pagination.js"></script>
+    <script src="/angularjs/js/base.js"></script>
+    <script src="/angularjs/js/controller/baseController.js"></script>
+    <script src="/angularjs/js/controller/adminController.js"></script>
+    <script src="/angularjs/js/service/adminService.js"></script>
+    <script src="/angularjs/js/service/uploadImgService.js"></script>
+    <script>
+        /**
+         * 改变内嵌页面展示
+         * @param src
+         */
+        function changeShowHtml(src) {
+            var showHtml = document.getElementById("showHtml");
+            showHtml.setAttribute('src', src);
+        }
+    </script>
+
+</head>
+
+<body>
+<div id="app" data-ng-app="mywebsite" ng-controller="adminController" ng-init="getAdminInfo()">
+
+    <div class="main-wrapper">
+
+        <!--侧边下拉菜单开始-->
+        <div class="navbar-bg" style="height: 65px;z-index: 0"></div>
+
+        <!--顶部开始-->
+        <nav class="navbar navbar-expand-lg main-navbar">
+            <form class="form-inline mr-auto">
+                <ul class="navbar-nav mr-3">
+                    <li><a href="#"  class="nav-link nav-link-lg"><i style="color: black"
+                            class="ion ion-navicon-round"></i></a></li>
+                </ul>
+            </form>
+            <ul class="navbar-nav navbar-right">
+                <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
+                                                             class="nav-link notification-toggle nav-link-lg beep"><i
+                        class="ion ion-ios-bell-outline"></i></a>
+                    <div class="dropdown-menu dropdown-list dropdown-menu-right">
+                        <div class="dropdown-header">Notifications
+                            <div class="float-right">
+                                <a href="#">View All</a>
+                            </div>
+                        </div>
+                        <div class="dropdown-list-content">
+                            <a href="#" class="dropdown-item dropdown-item-unread">
+                                <img alt="image" src="../dist/img/avatar/avatar-1.jpeg"
+                                     class="rounded-circle dropdown-item-img">
+                                <div class="dropdown-item-desc">
+                                    <b>Kusnaedi</b> has moved task <b>Fix bug header</b> to <b>Done</b>
+                                    <div class="time">10 Hours Ago</div>
+                                </div>
+                            </a>
+                            <a href="#" class="dropdown-item dropdown-item-unread">
+                                <img alt="image" src="../dist/img/avatar/avatar-2.jpeg"
+                                     class="rounded-circle dropdown-item-img">
+                                <div class="dropdown-item-desc">
+                                    <b>Ujang Maman</b> has moved task <b>Fix bug footer</b> to <b>Progress</b>
+                                    <div class="time">12 Hours Ago</div>
+                                </div>
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                <img alt="image" src="../dist/img/avatar/avatar-3.jpeg"
+                                     class="rounded-circle dropdown-item-img">
+                                <div class="dropdown-item-desc">
+                                    <b>Agung Ardiansyah</b> has moved task <b>Fix bug sidebar</b> to <b>Done</b>
+                                    <div class="time">12 Hours Ago</div>
+                                </div>
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                <img alt="image" src="../dist/img/avatar/avatar-4.jpeg"
+                                     class="rounded-circle dropdown-item-img">
+                                <div class="dropdown-item-desc">
+                                    <b>Ardian Rahardiansyah</b> has moved task <b>Fix bug navbar</b> to <b>Done</b>
+                                    <div class="time">16 Hours Ago</div>
+                                </div>
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                <img alt="image" src="../dist/img/avatar/avatar-5.jpeg"
+                                     class="rounded-circle dropdown-item-img">
+                                <div class="dropdown-item-desc">
+                                    <b>Alfa Zulkarnain</b> has moved task <b>Add logo</b> to <b>Done</b>
+                                    <div class="time">Yesterday</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                <li class="dropdown" ><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg" >
+                    <i class="ion ion-android-person d-lg-none" ></i>
+                    <div class="d-sm-none d-lg-inline-block"><p style="color: black;font-size: medium">Hi, {{loginName}}</p></div>
+                </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a href="../logout" class="dropdown-item has-icon">
+                            <i class="ion ion-log-out"></i> 登出
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+        <!--顶部结束-->
+
+        <div class="main-sidebar">
+            <aside id="sidebar-wrapper">
+                <div class="sidebar-brand">
+                    <a href="index.html">LiLei Lite</a>
+                </div>
+                <div class="sidebar-user">
+                    <div class="sidebar-user-picture">
+                        <img alt="image" ng-src="{{entity.picUrl}}">
+                    </div>
+                    <div class="sidebar-user-details">
+                        <div class="user-name">{{loginName}}</div>
+                        <div class="user-role">
+                            管理员
+                        </div>
+                    </div>
+                </div>
+                <ul class="sidebar-menu">
+                    <li class="menu-header"></li>
+                    <li class="active">
+                        <a href="index.html"><i class="ion ion-speedometer"></i><span>主页</span></a>
+                    </li>
+
+                    <li class="menu-header">内容管理</li>
+                    <li>
+                        <a href="#" class="has-dropdown"><i
+                                class="ion ion-ios-locked"></i><span>账号管理</span></a>
+                        <ul class="menu-dropdown">
+                            <li><a href="#" onclick="changeShowHtml('account.html')"><i class="ion ion-ios-circle-outline"></i>账号审核</a></li>
+                            <li><a href="#" onclick="changeShowHtml('adminInfo.html')"><i class="ion ion-ios-circle-outline"></i>完善和修改信息</a></li>
+                            <li><a href="#" onclick="changeShowHtml('reset.html')"><i class="ion ion-ios-circle-outline"></i>修改密码</a></li>
+                            <li><a href="#" onclick="changeShowHtml('remail.html')"><i class="ion ion-ios-circle-outline"></i>重新绑定邮箱</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" class="has-dropdown"><i class="ion ion-ios-home"></i><span>个人信息管理</span></a>
+                        <ul class="menu-dropdown">
+                            <li><a href="#"  onclick="changeShowHtml('personal.html')"><i class="ion ion-ios-circle-outline"></i>个人信息管理</a></li>
+                        </ul>
+                    </li>
+
+
+                    <li>
+                        <a href="#" class="has-dropdown"><i class="ion ion-ios-paper"></i><span>博客管理</span></a>
+                        <ul class="menu-dropdown">
+                            <li><a href="#" onclick="changeShowHtml('blog.html')"><i class="ion ion-ios-circle-outline"></i>博客管理</a></li>
+                            <li><a href="#" onclick="changeShowHtml('blog_category.html')"><i class="ion ion-ios-circle-outline"></i>博客类别管理</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#" class="has-dropdown"><i class="ion ion-android-happy"></i><span>动态管理</span></a>
+                        <ul class="menu-dropdown">
+                            <li><a href="#" onclick="changeShowHtml('trends.html')"><i class="ion ion-ios-circle-outline"></i>动态管理</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="menu-header">消息管理</li>
+
+                    <li>
+                        <a href="#" class="has-dropdown"><i class="ion ion-chatbox-working"></i><span>评论管理</span></a>
+                        <ul class="menu-dropdown">
+                            <li><a href="#" onclick="changeShowHtml('comment.html')"><i class="ion ion-ios-circle-outline"></i>评论管理</a></li>
+                        </ul>
+                    </li>
+
+
+                    <li>
+                        <a href="#" class="has-dropdown"><i class="ion ion-android-mail"></i><span>联系管理</span></a>
+                        <ul class="menu-dropdown">
+                            <li><a href="#" onclick="changeShowHtml('contact.html')"><i class="ion ion-ios-circle-outline"></i>联系管理</a></li>
+                            <li><a href="#" onclick="changeShowHtml('link_man.html')"><i class="ion ion-ios-circle-outline"></i>联系人管理</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+                <div class="p-3 mt-4 mb-4">
+                    <a href="#" class="btn btn-danger btn-shadow btn-round has-icon has-icon-nofloat btn-block">
+                        <i class="ion ion-help-buoy"></i>
+                        <div>Go PRO!</div>
+                    </a>
+                </div>
+            </aside>
+        </div>
+        <!--侧边下拉菜单结束-->
+
+        <!--正文开始-->
+        <div>
+            <iframe id="showHtml" src="default.html" scrolling="auto"
+                    width="100%" height="900px;"></iframe>
+        </div>
+        <!--正文结束-->
+
+
+        <!--页脚-->
+        <footer class="main-footer">
+            <div class="footer-left">
+                Copyright &copy; LiLei 2020
+            </div>
+            <div class="footer-right"></div>
+        </footer>
+    </div>
+</div>
+
+<script src="../dist/modules/jquery.min.js"></script>
+<script src="../dist/modules/popper.js"></script>
+<script src="../dist/modules/tooltip.js"></script>
+<script src="../dist/modules/bootstrap/js/bootstrap.min.js"></script>
+<script src="../dist/modules/nicescroll/jquery.nicescroll.min.js"></script>
+<script src="../dist/modules/scroll-up-bar/dist/scroll-up-bar.min.js"></script>
+<script src="../dist/js/sa-functions.js"></script>
+
+<script src="../dist/modules/chart.min.js"></script>
+<script src="../dist/modules/summernote/summernote-lite.js"></script>
+
+<script src="../dist/js/scripts.js"></script>
+<script src="../dist/js/custom.js"></script>
+<script src="../dist/js/demo.js"></script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+cn\boom\mywebsite\mapper\TbAdminMapper.class
+cn\boom\mywebsite\mapper\TbContactMapper.class
+cn\boom\mywebsite\mapper\TbBlogCategoryMapper.class
+cn\boom\mywebsite\mapper\TbBlogMapper.class
+cn\boom\mywebsite\mapper\TbPersonalMapper.class
+cn\boom\mywebsite\mapper\TbUserMapper.class
+cn\boom\mywebsite\mapper\TbCommentMapper.class
+cn\boom\mywebsite\mapper\TbTrendsMapper.class

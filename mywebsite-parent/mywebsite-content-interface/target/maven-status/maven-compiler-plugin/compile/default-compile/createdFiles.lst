@@ -1,0 +1,6 @@
+cn\boom\mywebsite\content\service\CommentService.class
+cn\boom\mywebsite\content\service\AdminService.class
+cn\boom\mywebsite\content\service\UserService.class
+cn\boom\mywebsite\content\service\PersonService.class
+cn\boom\mywebsite\content\service\TrendsService.class
+cn\boom\mywebsite\content\service\ContactService.class

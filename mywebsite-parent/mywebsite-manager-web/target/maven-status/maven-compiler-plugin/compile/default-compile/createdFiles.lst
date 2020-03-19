@@ -1,0 +1,11 @@
+cn\boom\mywebsite\manager\controller\CommentController.class
+cn\boom\mywebsite\manager\service\LoginAuthenticationSuccessHandlerImpl.class
+cn\boom\mywebsite\manager\service\AdminDetailsServiceImpl.class
+cn\boom\mywebsite\manager\controller\AdminController.class
+cn\boom\mywebsite\manager\controller\BlogCategoryController.class
+cn\boom\mywebsite\manager\controller\UserController.class
+cn\boom\mywebsite\manager\controller\TrendsController.class
+cn\boom\mywebsite\manager\controller\UploadController.class
+cn\boom\mywebsite\manager\controller\PersonalController.class
+cn\boom\mywebsite\manager\service\LoginAuthenticationFailureHandlerImpl.class
+cn\boom\mywebsite\manager\controller\BlogController.class

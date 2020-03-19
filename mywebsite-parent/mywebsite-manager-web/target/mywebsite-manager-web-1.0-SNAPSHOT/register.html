@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no"
+          name="viewport">
+    <title>Register &mdash; LiLei</title>
+
+    <link rel="stylesheet" href="dist/modules/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="dist/modules/ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="dist/modules/fontawesome/web-fonts-with-css/css/fontawesome-all.min.css">
+
+    <link rel="stylesheet" href="dist/css/demo.css">
+    <link rel="stylesheet" href="dist/css/style.css">
+
+    <script src="/angularjs/plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="/angularjs/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/angularjs/plugins/angularjs/angular.min.js"></script>
+    <script src="/angularjs/plugins/angularjs/pagination.js"></script>
+    <script src="/angularjs/js/base.js"></script>
+    <script src="/angularjs/js/controller/baseController.js"></script>
+    <script src="/angularjs/js/controller/registerController.js"></script>
+    <script src="/angularjs/js/service/registerService.js"></script>
+
+
+</head>
+
+<body>
+    <div id="app"  data-ng-app="mywebsite" ng-controller="registerController">
+    <section class="section">
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
+                    <div class="login-brand">
+                        LiLei
+                    </div>
+
+                    <div class="card card-primary">
+                        <div class="card-header"><h4>注册</h4></div>
+
+                        <div class="card-body">
+                            <form method="POST">
+                                <div class="row">
+                                    <div class="form-group col-6">
+                                        <label>用户名</label>
+                                        <input id="admin" ng-model="entity.admin" type="text" class="form-control" name="admin" autofocus>
+                                    </div>
+
+
+                                    <div class="form-group col-6">
+                                        <label for="email">邮箱</label>
+                                        <input id="email" ng-model="entity.email" type="email" class="form-control" name="email">
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-6">
+                                        <label for="password" class="d-block">密码</label>
+                                        <input id="password" ng-model="entity.password" type="password" class="form-control" name="password">
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label for="password2" class="d-block">密码确认</label>
+                                        <input id="password2" ng-model="entity.password2"  type="password" class="form-control"
+                                               name="password-confirm">
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" ng-model="entity.agree" name="agree" class="custom-control-input" id="agree">
+                                        <label class="custom-control-label" for="agree">同意并接受<a
+                                                href="item.html">相关条款</a></label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary btn-block" ng-click="register()">
+                                        注册
+                                    </button>
+                                </div>
+
+                                <div class="form-group">
+                                    <p style="color: red">{{errorMsg}}</p>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                    <div class="simple-footer">
+                        Copyright &copy; LiLei 2020
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+<script src="dist/modules/jquery.min.js"></script>
+<script src="dist/modules/popper.js"></script>
+<script src="dist/modules/tooltip.js"></script>
+<script src="dist/modules/bootstrap/js/bootstrap.min.js"></script>
+<script src="dist/modules/nicescroll/jquery.nicescroll.min.js"></script>
+<script src="dist/modules/scroll-up-bar/dist/scroll-up-bar.min.js"></script>
+<script src="dist/js/sa-functions.js"></script>
+
+<script src="dist/js/scripts.js"></script>
+<script src="dist/js/custom.js"></script>
+<script src="dist/js/demo.js"></script>
+
+
+
+</body>
+</html>

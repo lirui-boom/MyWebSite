@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" name="viewport">
+  <title>Login &mdash; LiLei</title>
+
+  <link rel="stylesheet" href="dist/modules/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="dist/modules/ionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href="dist/modules/fontawesome/web-fonts-with-css/css/fontawesome-all.min.css">
+
+  <link rel="stylesheet" href="dist/css/demo.css">
+  <link rel="stylesheet" href="dist/css/style.css">
+
+  <script src="/angularjs/plugins/jQuery/jquery-2.2.3.min.js"></script>
+  <script src="/angularjs/plugins/bootstrap/js/bootstrap.min.js"></script>
+  <script src="/angularjs/plugins/angularjs/angular.min.js"></script>
+  <script src="/angularjs/plugins/angularjs/pagination.js"></script>
+  <script src="/angularjs/js/base.js"></script>
+  <script src="/angularjs/js/controller/baseController.js"></script>
+  <script src="/angularjs/js/controller/loginController.js"></script>
+  <script src="/angularjs/js/service/loginService.js"></script>
+</head>
+
+<body>
+  <div id="app" data-ng-app="mywebsite" ng-controller="loginController">
+    <section class="section">
+      <div class="container mt-5">
+        <div class="row">
+          <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
+            <div class="login-brand">
+              LiLei
+            </div>
+
+            <div class="card card-primary">
+              <div class="card-header"><h4>登陆我的网站后台管理系统</h4></div>
+
+              <div class="card-body">
+                <form method="POST" action="/login" class="needs-validation" novalidate="">
+                  <div class="form-group">
+                    <label>用户名</label>
+                    <input id="admin" ng-model="entity.username" class="form-control" name="username" tabindex="1" required autofocus>
+                    <div class="invalid-feedback">
+                      请填写用户名
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="password" class="d-block">密码
+                      <div class="float-right">
+                        <a href="forgot.html">
+                          忘记密码了?
+                        </a>
+                      </div>
+                    </label>
+                    <input id="password" ng-model="entity.password" type="password" class="form-control" name="password" tabindex="2" required>
+                    <div class="invalid-feedback">
+                      请填写密码
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" name="remember" class="custom-control-input" tabindex="3" id="remember-me">
+                      <label class="custom-control-label" for="remember-me">记住我</label>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <button  class="btn btn-primary btn-block" tabindex="4" ng-click="login()">
+                      登陆
+                    </button>
+                  </div>
+
+                  <div class="form-group">
+                    <p style="color: red">{{msg}}</p>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="mt-5 text-muted text-center">
+              没有账户? <a href="register.html">创建一个</a>
+            </div>
+            <div class="simple-footer">
+              Copyright &copy; LiLei 2020
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="dist/modules/jquery.min.js"></script>
+  <script src="dist/modules/popper.js"></script>
+  <script src="dist/modules/tooltip.js"></script>
+  <script src="dist/modules/bootstrap/js/bootstrap.min.js"></script>
+  <script src="dist/modules/nicescroll/jquery.nicescroll.min.js"></script>
+  <script src="dist/modules/scroll-up-bar/dist/scroll-up-bar.min.js"></script>
+  <script src="dist/js/sa-functions.js"></script>
+  
+  <script src="dist/js/scripts.js"></script>
+  <script src="dist/js/custom.js"></script>
+  <script src="dist/js/demo.js"></script>
+</body>
+</html>

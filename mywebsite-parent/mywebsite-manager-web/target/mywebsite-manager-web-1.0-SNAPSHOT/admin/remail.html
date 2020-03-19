@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no"
+          name="viewport">
+    <title>LiLei</title>
+
+    <link rel="stylesheet" href="../dist/modules/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../dist/modules/ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="../dist/modules/fontawesome/web-fonts-with-css/css/fontawesome-all.min.css">
+
+    <link rel="stylesheet" href="../dist/modules/summernote/summernote-lite.css">
+    <link rel="stylesheet" href="../dist/modules/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="../dist/css/demo.css">
+    <link rel="stylesheet" href="../dist/css/style.css">
+    <link rel="stylesheet" href="../dist/modules/toastr/build/toastr.min.css">
+
+    <script src="/angularjs/plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="/angularjs/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/angularjs/plugins/angularjs/angular.min.js"></script>
+    <script src="/angularjs/plugins/angularjs/pagination.js"></script>
+    <script src="/angularjs/js/base.js"></script>
+    <script src="/angularjs/js/controller/baseController.js"></script>
+    <script src="/angularjs/js/controller/adminController.js"></script>
+    <script src="/angularjs/js/service/adminService.js"></script>
+
+</head>
+
+<body>
+<div id="app" data-ng-app="mywebsite" ng-controller="adminController" ng-init="getAdminInfo()">
+
+    <!-- 内容区域 -->
+    <div class="main-content">
+
+        <section class="section">
+
+            <h1 class="section-header">
+                <div>邮箱重新绑定</div>
+            </h1>
+
+            <div class="container mt-5">
+            <div class="row">
+                <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
+
+                    <div class="card card-primary">
+                        <div class="card-header"><h4>邮箱重新绑定</h4></div>
+
+                        <div class="card-body">
+                            <form method="POST">
+
+                                <div class="form-group">
+                                    <label for="email">新邮箱地址</label>
+                                    <input id="email" type="email" ng-model="entity.email" class="form-control" name="email">
+                                    <div class="invalid-feedback">
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="form-group col-6">
+                                        <label for="token">验证码</label>
+                                        <input id="token" ng-model="entity.token" class="form-control" name="token">
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label for="getToken">获取验证码</label>
+                                        <button id="getToken" class="btn btn-primary btn-block" style="background-color: #2b669a;width: 50%" ng-click="sendReEmail()">
+                                            发送邮箱验证码
+                                        </button>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <button class="btn btn-primary btn-block" ng-click="updateEmail()">
+                                        提交
+                                    </button>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                    <div class="simple-footer">
+                        Copyright &copy; LiLei 2020
+                    </div>
+                </div>
+            </div>
+        </div>
+        </section>
+    </div>
+    <!-- 内容区域 -->
+</div>
+
+<script src="../dist/modules/jquery.min.js"></script>
+<script src="../dist/modules/popper.js"></script>
+<script src="../dist/modules/tooltip.js"></script>
+<script src="../dist/modules/bootstrap/js/bootstrap.min.js"></script>
+<script src="../dist/modules/nicescroll/jquery.nicescroll.min.js"></script>
+<script src="../dist/modules/scroll-up-bar/dist/scroll-up-bar.min.js"></script>
+<script src="../dist/js/sa-functions.js"></script>
+
+<script src="../dist/modules/chart.min.js"></script>
+<script src="../dist/modules/summernote/summernote-lite.js"></script>
+
+<script src="../dist/js/scripts.js"></script>
+<script src="../dist/js/custom.js"></script>
+<script src="../dist/js/demo.js"></script>
+<script src="../dist/modules/toastr/build/toastr.min.js"></script>
+
+</body>
+</html>

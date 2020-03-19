@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- 页面meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>特长分类管理</title>
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="../angularjs/plugins/adminLTE/css/AdminLTE.css">
+    <link rel="stylesheet" href="../angularjs/plugins/adminLTE/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="../dist/modules/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../dist/modules/ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="../dist/modules/fontawesome/web-fonts-with-css/css/fontawesome-all.min.css">
+
+    <link rel="stylesheet" href="../dist/modules/summernote/summernote-lite.css">
+    <link rel="stylesheet" href="../dist/modules/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="../dist/css/demo.css">
+    <link rel="stylesheet" href="../dist/css/style.css">
+    <link rel="stylesheet" href="../dist/modules/toastr/build/toastr.min.css">
+
+    <script src="/angularjs/plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="/angularjs/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/angularjs/plugins/angularjs/angular.min.js"></script>
+    <script src="/angularjs/plugins/angularjs/pagination.js"></script>
+    <script src="/angularjs/js/base.js"></script>
+    <script src="/angularjs/js/controller/baseController.js"></script>
+    <script src="/angularjs/js/controller/blogCategoryController.js"></script>
+    <script src="/angularjs/js/service/blogCategoryService.js"></script>
+
+</head>
+
+<body class="hold-transition skin-red sidebar-mini" data-ng-app="mywebsite" ng-controller="blogCategoryController" ng-init="findAll()">
+
+<!-- 内容区域 -->
+<div class="main-content">
+    <section class="section">
+        <h1 class="section-header">
+            <div>博客分类管理</div>
+        </h1>
+
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-6">
+                <div class="card" style="width: 205%">
+
+                    <!--工具栏-->
+                    <div class="card-header">
+                        <div class="float-right">
+                        </div>
+                        <a href="#" class="btn btn-info"  data-toggle="modal" data-target="#editModal" ng-click="tableEntity=null">添加</a>
+                        <a href="#" class="btn btn-info" ng-click="deleteIds()">删除</a>
+                        <a href="#" class="btn btn-info" ng-click="reload()">刷新</a>
+                    </div>
+                    <!--工具栏结束-->
+
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" style="text-align: center">
+                                <tr>
+                                    <th style="padding-right:0px">
+                                        <input type="checkbox">
+                                    </th>
+                                    <th>分类id</th>
+                                    <th>分类名称</th>
+                                    <th colspan="2">操作</th>
+                                </tr>
+                                <tr ng-repeat="pojo in resultEntityList">
+                                    <td style="padding-right:0px">
+                                        <input type="checkbox" ng-click="updateSelection(pojo.id)">
+                                    </td>
+                                    <td>{{pojo.id}}</td>
+                                    <td>{{pojo.name}}</td>
+                                    <td><a href="#" class="btn btn-action btn-secondary" ng-click="deleteById(pojo.id)">删除</a></td>
+                                    <td>
+                                        <button type="button" class="btn btn-action btn-secondary"  data-toggle="modal" data-target="#editModal" ng-click="findOneById(pojo.id)">
+                                            修改
+                                        </button>
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<!-- 内容区域 -->
+
+
+<!-- 编辑窗口 -->
+<div class="modal fade" style="margin-top: 10%" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 id="myModalLabel">博客类别编辑</h4>
+            </div>
+            <div class="modal-body">
+
+                <table class="table table-bordered table-striped" width="800px" style="text-align: center">
+                    <tr>
+                        <td style="vertical-align:middle;">博客分类名称</td>
+                        <td><input class="form-control" ng-model="tableEntity.name" placeholder="分类名称"></td>
+                    </tr>
+                </table>
+
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success" data-dismiss="modal" aria-hidden="true" ng-click="save()">保存</button>
+                <button class="btn btn-default" data-dismiss="modal" aria-hidden="true" onclick="close()">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+
+</script>
+
+<script src="../dist/modules/jquery.min.js"></script>
+<script src="../dist/modules/popper.js"></script>
+<script src="../dist/modules/tooltip.js"></script>
+<script src="../dist/modules/bootstrap/js/bootstrap.min.js"></script>
+<script src="../dist/modules/nicescroll/jquery.nicescroll.min.js"></script>
+<script src="../dist/modules/scroll-up-bar/dist/scroll-up-bar.min.js"></script>
+<script src="../dist/js/sa-functions.js"></script>
+
+<script src="../dist/modules/chart.min.js"></script>
+<script src="../dist/modules/summernote/summernote-lite.js"></script>
+
+<script src="../dist/js/custom.js"></script>
+<script src="../dist/js/demo.js"></script>
+<script src="../dist/modules/toastr/build/toastr.min.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no"
+          name="viewport">
+    <title>LiLei</title>
+
+    <link rel="stylesheet" href="../dist/modules/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../dist/modules/ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="../dist/modules/fontawesome/web-fonts-with-css/css/fontawesome-all.min.css">
+
+    <link rel="stylesheet" href="../dist/modules/summernote/summernote-lite.css">
+    <link rel="stylesheet" href="../dist/modules/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="../dist/css/demo.css">
+    <link rel="stylesheet" href="../dist/css/style.css">
+    <link rel="stylesheet" href="../dist/modules/toastr/build/toastr.min.css">
+
+    <script src="/angularjs/plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="/angularjs/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/angularjs/plugins/angularjs/angular.min.js"></script>
+    <script src="/angularjs/plugins/angularjs/pagination.js"></script>
+    <script src="/angularjs/js/base.js"></script>
+    <script src="/angularjs/js/controller/baseController.js"></script>
+    <script src="/angularjs/js/controller/accountController.js"></script>
+    <script src="/angularjs/js/service/adminService.js"></script>
+
+</head>
+
+<body>
+<div id="app" data-ng-app="mywebsite" ng-controller="accountController" ng-init="search()">
+
+    <!-- 内容区域 -->
+    <div class="main-content">
+
+        <section class="section">
+            <h1 class="section-header">
+                <div>账号管理</div>
+            </h1>
+
+            <div class="row">
+                <div class="col-12 col-md-6 col-lg-6">
+                    <div class="card" style="width: 205%">
+
+                        <div class="card-header">
+                            <div class="float-right">
+                                <form>
+                                    <div class="input-group">
+
+                                        姓名：<input ng-model="searchEntity.name"
+                                                  style="height: 100%;align-self: center">&nbsp;&nbsp;&nbsp;&nbsp;
+                                        状态：&nbsp;&nbsp;<input id="all" checked="checked" ng-model="searchEntity.status" type="radio"
+                                                              name="radio1" value="" style="align-self: center"><label for="all">全部</label>
+                                        &nbsp;&nbsp;<input id="unactive" ng-model="searchEntity.status" type="radio"
+                                                           name="radio1"
+                                                           value="-1" style="align-self: center"><label for="unactive">未激活</label>
+                                        &nbsp;&nbsp;<input id="uncheck" ng-model="searchEntity.status" type="radio"
+                                                           name="radio1"
+                                                           value="0" style="align-self: center"><label for="uncheck">待审核</label>
+                                        &nbsp;&nbsp;<input id="check" ng-model="searchEntity.status" type="radio"
+                                                           name="radio1"
+                                                           value="1" style="align-self: center"><label for="check">已审核</label>
+                                        &nbsp;&nbsp;<input id="unchecked" ng-model="searchEntity.status" type="radio"
+                                                           name="radio1"
+                                                           value="2" style="align-self: center"><label for="unchecked">审核未通过</label>
+                                        &nbsp;&nbsp;
+                                        <div class="input-group-btn">
+                                            <a href="#" class="btn btn-action btn-secondary" ng-click="searchEntity.pageNum=1;search();">
+                                                <i class="ion ion-search">查询</i>
+                                            </a>
+                                        </div>
+                                    </label></div>
+                                </form>
+                            </div>
+
+
+                            <a href="#" class="btn btn-info" ng-click="deleteIds()">删除</a>
+                            <a href="#" class="btn btn-info" ng-click="updateStatusIds('1')">审核通过</a>
+                            <a href="#" class="btn btn-info" ng-click="updateStatusIds('2')">驳回</a>
+                            <a href="#" class="btn btn-info" ng-click="reload()">刷新</a>
+
+                        </div>
+
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" style="text-align: center">
+                                    <tr>
+                                        <th style="padding-right:0px">
+                                            <input type="checkbox">
+                                        </th>
+                                        <th>id</th>
+                                        <th>用户名</th>
+                                        <th>姓名</th>
+                                        <th>邮箱</th>
+                                        <th>手机</th>
+                                        <th>创建日期</th>
+                                        <th>状态</th>
+                                        <th colspan="2">操作</th>
+                                    </tr>
+                                    <tr ng-repeat=" pojo in resultEntityList">
+                                        <td style="padding-right:0px">
+                                            <input type="checkbox" ng-click="updateSelection(pojo.id)">
+                                        </td>
+                                        <td>{{pojo.id}}</td>
+                                        <td>{{pojo.admin}}</td>
+                                        <td>{{pojo.name}}</td>
+                                        <td>{{pojo.email}}</td>
+                                        <td>{{pojo.phone}}</td>
+                                        <td>{{pojo.created}}</td>
+                                        <td>
+                                            <div class="badge badge-success">{{statusList[pojo.status*1 + 1]}}</div>
+                                        </td>
+                                        <td><a href="#" class="btn btn-action btn-secondary" ng-click="deleteById(pojo.id)">删除</a></td>
+                                        <td><a href="#" class="btn btn-action btn-secondary">修改</a></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="card-footer text-right">
+                            <nav class="d-inline-block">
+                                <ul class="pagination mb-0">
+
+
+                                    <li class="page-item {{isFirstPage()?'disabled':''}}">
+                                        <a class="page-link" href="#" tabindex="-1"  ng-click="queryByPage(resultMap.pageNum-1)"><i
+                                                class="ion ion-chevron-left"></i></a>
+                                    </li>
+
+                                    <li ng-repeat=" page in pageLabel" class="page-item {{page==searchEntity.pageNum?'active':''}}" >
+                                        <a class="page-link" href="#" ng-click="queryByPage(page)">{{page}}
+                                            <span class="sr-only">(current)</span>
+                                        </a>
+                                    </li>
+
+
+                                    <li class="page-item {{isEndPage()?'disabled':''}}">
+                                        <a class="page-link" href="#" ng-click="queryByPage(resultMap.pageNum+1)">
+                                            <i class="ion ion-chevron-right"></i>
+                                        </a>
+                                    </li>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <div style="align-self: center">
+                                        <span>共{{resultMap.totalPages}}页,&nbsp;总计{{resultMap.total}}条记录</span>
+                                    </div>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- 内容区域 -->
+</div>
+
+<script src="../dist/modules/jquery.min.js"></script>
+<script src="../dist/modules/popper.js"></script>
+<script src="../dist/modules/tooltip.js"></script>
+<script src="../dist/modules/bootstrap/js/bootstrap.min.js"></script>
+<script src="../dist/modules/nicescroll/jquery.nicescroll.min.js"></script>
+<script src="../dist/modules/scroll-up-bar/dist/scroll-up-bar.min.js"></script>
+<script src="../dist/js/sa-functions.js"></script>
+
+<script src="../dist/modules/chart.min.js"></script>
+<script src="../dist/modules/summernote/summernote-lite.js"></script>
+
+<script src="../dist/js/scripts.js"></script>
+<script src="../dist/js/custom.js"></script>
+<script src="../dist/js/demo.js"></script>
+<script src="../dist/modules/toastr/build/toastr.min.js"></script>
+
+</body>
+</html>

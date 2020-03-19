@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+
+<html class="no-js"> <!--<![endif]-->
+<head>
+
+    <title>LiLei - 关于我</title>
+
+    <!-- meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+
+    <!-- stylesheets -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet" href="assets/css/owl.carousel.css">
+    <link rel="stylesheet" href="assets/css/owl.theme.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+
+
+    <script src="/angularjs/plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="/angularjs/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/angularjs/plugins/angularjs/angular.min.js"></script>
+    <script src="/angularjs/plugins/angularjs/pagination.js"></script>
+    <script src="/angularjs/js/base.js"></script>
+    <script src="/angularjs/js/controller/baseController.js"></script>
+    <script src="/angularjs/js/controller/personalController.js"></script>
+    <script src="/angularjs/js/service/personalService.js"></script>
+
+
+</head>
+
+<body data-ng-app="mywebsite" ng-controller="personalController" ng-init="find()">
+
+<div id="about-page">
+
+    <!-- 顶部开始 -->
+    <iframe src="head.html" frameborder="0" width="100%" height="75px"></iframe>
+    <!-- 顶部结束 -->
+
+    <!-- header begin -->
+    <header class="page-head">
+        <div class="header-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <ol class="breadcrumb">
+                            <li><a href="index.html" target="_parent">主页</a></li>
+                            <li class="active">关于我</li>
+                        </ol> <!-- end of /.breadcrumb -->
+
+                    </div>
+                </div>
+            </div> <!-- /.container -->
+        </div> <!-- /.header-wrapper -->
+    </header> <!-- /.page-head (header end) -->
+
+    <div class="main-content">
+
+        <!--描述-->
+        <section class="bg-white story">
+            <div class="container">
+                <div class="headline text-center">
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3">
+                            <h3 class="section-title">关于我</h3>
+                        </div>
+                    </div>
+                </div> <!-- /.headline -->
+
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1 text-center">
+                        <div id="{{entity.id}}" class="story-description">
+                            {{showContent(entity.id,entity.perDesc)}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!--个人信息-->
+        <section class="bg-white designation">
+            <div class="container">
+
+                <div class="headline text-center">
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3">
+                            <h3 class="section-title">基本信息</h3>
+                        </div>
+                    </div>
+                </div> <!-- /.headline -->
+
+                <div class="team-list">
+                    <div class="container">
+                        <div class="row">
+
+                            <!--头像-->
+                            <div class="col-md-4">
+                                <div class="team-member-box text-center">
+                                    <div style="margin-top: 5%">
+                                        <img ng-src="{{entity.picUrl}}" class="img-responsive center-block"
+                                             alt="team-member 1">
+                                    </div>
+
+                                    <div class="team-member-description">
+                                        <div class="team-member-about">
+                                            <h4>{{entity.name}}</h4>
+                                            <p>连续打了六个喷嚏，我知道是自己感冒了。</p>
+
+                                        </div> <!-- end of /.team-member-about -->
+                                        <div class="team-member-social">
+                                            <a href="#">
+                                                <i class="fa fa-facebook"></i>
+                                            </a>
+                                            <a href="#">
+                                                <i class="fa fa-twitter"></i>
+                                            </a>
+                                            <a href="#">
+                                                <i class="fa fa-linkedin"></i>
+                                            </a>
+                                        </div> <!-- end of /.team-member-social -->
+                                    </div> <!-- end of /.team-member-description -->
+                                </div> <!-- end of /.team-member-box -->
+                            </div>
+
+
+                            <!--个人信息-->
+                            <div style="margin-top: 5%">
+                                <div class="col-md-4" style="width: 30%">
+
+                                    <div class="form-group col-6">
+                                        <label for="name">姓名</label>
+                                        <input id="name" readonly ng-model="entity.name" type="text"
+                                               class="form-control"
+                                               autofocus>
+                                    </div>
+
+                                    <div class="form-group col-6">
+                                        <label for="age">年龄</label>
+                                        <input id="age" readonly ng-model="entity.age" class="form-control">
+                                    </div>
+
+                                    <div class="form-group col-6">
+                                        <label for="hobby">喜好</label>
+                                        <textarea id="hobby" readonly ng-model="entity.hobby" type="text"
+                                                  class="form-control"
+                                                  autofocus></textarea>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4" style="width: 30%">
+
+                                    <div class="form-group col-6">
+                                        <label for="email">邮箱</label>
+                                        <input id="email" readonly ng-model="entity.email" class="form-control">
+                                    </div>
+
+                                    <div class="form-group col-6">
+                                        <label for="phone">手机</label>
+                                        <input id="phone" readonly ng-model="entity.phone" class="form-control">
+                                    </div>
+
+
+                                    <div class="form-group col-6">
+                                        <label for="speciality">特长</label>
+                                        <textarea id="speciality" readonly ng-model="entity.speciality" type="text"
+                                                  class="form-control"
+                                                  autofocus></textarea>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- end of /.team-list -->
+            </div>
+        </section>
+
+
+        <section class="bg-white sponsor">
+            <div class="container">
+                <div id="sponsor-list" class="owl-carousel owl-theme">
+
+                    <div class="item">
+                        <img src="assets/img/sponsor1.png" alt="sponsor1" class="center-block"
+                             style="width: 165px; height: 127px;">
+                    </div>
+
+                    <div class="item">
+                        <img src="assets/img/sponsor2.png" alt="sponsor2" class="center-block"
+                             style="width: 165px; height: 127px;">
+                    </div>
+
+                    <div class="item">
+                        <img src="assets/img/sponsor3.png" alt="sponsor3" class="center-block"
+                             style="width: 165px; height: 127px;">
+                    </div>
+
+                    <div class="item">
+                        <img src="assets/img/sponsor4.png" alt="sponsor4" class="center-block"
+                             style="width: 165px; height: 127px;">
+                    </div>
+
+                    <div class="item">
+                        <img src="assets/img/sponsor5.png" alt="sponsor5" class="center-block"
+                             style="width: 165px; height: 127px;">
+                    </div>
+
+                    <div class="item">
+                        <img src="assets/img/sponsor6.png" alt="sponsor6" class="center-block"
+                             style="width: 165px; height: 127px;">
+                    </div>
+
+                </div> <!--  / #sponsor-list /.owl-carousel -->
+            </div>
+        </section>
+
+    </div> <!-- end of /.main-content -->
+
+
+    <!--页脚开始-->
+    <nav class="hidden-xs hidden-sm navbar footer-nav" role="navigation">
+        <div class="container">
+
+        </div>
+    </nav>
+    <!--页脚结束-->
+
+</div>
+<!-- end of /#about-page -->
+
+
+<!--  Necessary scripts  -->
+<script type="text/javascript" src="assets/js/jquery-2.1.3.min.js"></script>
+<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="assets/js/owl.carousel.js"></script>
+
+
+<!-- script for sponsor using owl carousel -->
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#sponsor-list").owlCarousel({
+
+            autoPlay: 3000, //Set AutoPlay to 3 seconds
+            stopOnHover: true,
+            items: 4,
+            itemsDesktop: [1200, 4],
+            itemsDesktopSmall: [991, 3],
+            itemsTablet: [767, 2],
+            itemsTabletSmall: [625, 2],
+            itemsMobile: [479, 1]
+        });
+
+    });
+</script>
+</body>
+</html>

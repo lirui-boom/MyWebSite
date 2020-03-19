@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no"
+          name="viewport">
+    <title>个人信息管理 &mdash; LiLei</title>
+
+    <link rel="stylesheet" href="../dist/modules/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../dist/modules/ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="../dist/modules/fontawesome/web-fonts-with-css/css/fontawesome-all.min.css">
+
+    <link rel="stylesheet" href="../dist/css/demo.css">
+    <link rel="stylesheet" href="../dist/css/style.css">
+
+    <!-- 富文本编辑器 -->
+    <link rel="stylesheet" href="../angularjs/plugins/kindeditor/themes/default/default.css"/>
+    <script charset="utf-8" src="../angularjs/plugins/kindeditor/kindeditor-min.js"></script>
+    <script charset="utf-8" src="../angularjs/plugins/kindeditor/lang/zh_CN.js"></script>
+
+    <link rel="stylesheet" href="../dist/modules/toastr/build/toastr.min.css">
+    <script src="/angularjs/plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="/angularjs/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/angularjs/plugins/angularjs/angular.min.js"></script>
+    <script src="/angularjs/plugins/angularjs/pagination.js"></script>
+    <script src="/angularjs/js/base.js"></script>
+    <script src="/angularjs/js/controller/baseController.js"></script>
+    <script src="/angularjs/js/controller/personalController.js"></script>
+    <script src="/angularjs/js/service/personalService.js"></script>
+    <script src="/angularjs/js/service/uploadImgService.js"></script>
+
+    <script type="text/javascript">
+        var editor;
+        KindEditor.ready(function(K) {
+            editor = K.create('textarea[name="content"]', {
+                allowFileManager : true
+            });
+        });
+    </script>
+</head>
+
+<body>
+<div id="app" data-ng-app="mywebsite" ng-controller="personalController" ng-init="find()">
+
+    <div class="main-content">
+        <section class="section">
+
+            <h1 class="section-header">
+                <div>个人信息管理</div>
+            </h1>
+
+            <div class="container mt-5">
+                <div class="row">
+                    <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
+
+                        <div class="card card-primary">
+                            <div class="card-header"><h4>个人信息管理</h4></div>
+
+                            <div class="card-body">
+                                <form method="POST">
+                                    <div class="row">
+
+                                        <div class="form-group col-6">
+                                            <label>头像</label>
+                                            <div class="form-control">
+                                                <img ng-src="{{entity.picUrl}}" style="max-width:250px;max-height:250px;border:1px;margin-left: 7%" />
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-6">
+                                            <label>头像上传</label>
+
+                                            <div style="margin-top: 30%">
+                                                <input type="file" id="file"/><br/><br/>
+                                                <button class="btn btn-outline-info" style="margin-left: 10%" ng-click="uploadImg()">上传</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="form-group col-6">
+                                            <label for="name">姓名</label>
+                                            <input id="name" ng-model="entity.name" class="form-control">
+                                            <div class="invalid-feedback">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group col-6">
+                                            <label for="sex">性别</label>
+                                            <input id="sex" ng-model="entity.sex" class="form-control">
+                                        </div>
+
+                                        <div class="form-group col-6">
+                                            <label for="age" class="d-block">年龄</label>
+                                            <input id="age" ng-model="entity.age" class="form-control">
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class="form-group col-6">
+                                            <label for="phone">手机</label>
+                                            <input id="phone" ng-model="entity.phone" class="form-control">
+                                        </div>
+
+                                        <div class="form-group col-6">
+                                            <label for="email" class="d-block">邮箱</label>
+                                            <input id="email" ng-model="entity.email" type="email" class="form-control">
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class="form-group col-6">
+                                            <label for="hobby" class="d-block">爱好</label>
+                                            <textarea id="hobby" ng-model="entity.hobby"  class="form-control"></textarea>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group col-6">
+                                            <label for="speciality" class="d-block">特长</label>
+                                            <textarea id="speciality" ng-model="entity.speciality" class="form-control"></textarea>
+
+                                        </div>
+                                    </div>
+
+
+                                    <!--富文本编辑器-->
+                                    <div class="row">
+                                        <div class="form-group col-6">
+                                        <label for="content" class="d-block">描述</label>
+                                        <textarea id="content"  name="content" style="width:200%;height:400px;visibility:hidden;" ></textarea>
+
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary btn-block" ng-click="update()">
+                                            提交
+                                        </button>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                        <div class="simple-footer">
+                            Copyright &copy; LiLei 2020
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+</div>
+
+
+<script src="../dist/modules/jquery.min.js"></script>
+<script src="../dist/modules/popper.js"></script>
+<script src="../dist/modules/tooltip.js"></script>
+<script src="../dist/modules/bootstrap/js/bootstrap.min.js"></script>
+<script src="../dist/modules/nicescroll/jquery.nicescroll.min.js"></script>
+<script src="../dist/modules/scroll-up-bar/dist/scroll-up-bar.min.js"></script>
+<script src="../dist/js/sa-functions.js"></script>
+
+<script src="../dist/modules/chart.min.js"></script>
+<script src="../dist/modules/summernote/summernote-lite.js"></script>
+
+<script src="../dist/js/scripts.js"></script>
+<script src="../dist/js/custom.js"></script>
+<script src="../dist/js/demo.js"></script>
+<script src="../dist/modules/toastr/build/toastr.min.js"></script>
+
+
+</body>
+</html>
