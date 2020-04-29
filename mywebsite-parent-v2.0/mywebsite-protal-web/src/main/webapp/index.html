@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+
+<html class="no-js"> <!--<![endif]-->
+<head>
+
+    <title>LiLei - Home</title>
+
+    <!-- meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- stylesheets -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet" href="assets/css/owl.carousel.css">
+    <link rel="stylesheet" href="assets/css/owl.theme.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <script src="/angularjs/plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="/angularjs/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/angularjs/plugins/angularjs/angular.min.js"></script>
+    <script src="/angularjs/plugins/angularjs/pagination.js"></script>
+    <script src="/angularjs/js/base.js"></script>
+    <script src="/angularjs/js/controller/baseController.js"></script>
+
+    <!-- scripts -->
+    <script type="text/javascript" src="assets/js/modernizr.custom.97074.js"></script>
+
+    <script>
+        function setIframeHeight(iframe) {
+            if (iframe) {
+
+                var iframeWin = iframe.contentWindow || iframe.contentDocument.parentWindow;
+                if (iframeWin.document.body) {
+                    iframe.height = iframeWin.document.documentElement.scrollHeight || iframeWin.document.body.scrollHeight;
+                }
+            }
+        };
+    </script>
+
+
+</head>
+
+<body>
+
+<div id="home-page">
+
+    <!-- 顶部开始 -->
+    <iframe src="head.html" frameborder="0" width="100%" height="75px"></iframe>
+    <!-- 顶部结束 -->
+
+
+    <!-- 欢迎页面 -->
+    <header id="header" class="header-wrapper home-parallax home-fade">
+        <div class="header-overlay"></div>
+        <div class="header-wrapper-inner">
+            <div class="container">
+
+                <div class="welcome-speech">
+                    <h1>欢迎来到LiLei的个人主页</h1>
+                    <p>Welcome to LiLei's home page</p>
+                    <a href="#" class="btn btn-white">
+                        Show My Life
+                    </a>
+                </div><!-- /.intro -->
+
+            </div><!-- /.container -->
+
+        </div><!-- /.header-wrapper-inner -->
+    </header>
+    <!-- 欢迎页面结束 -->
+
+    <!--正文内容开始-->
+    <div class="main-content">
+
+         <!--  onload="setIframeHeight(this)"-->
+        <iframe src="index_trends.html" frameborder="0" width="100%"
+                scrolling="no" height="450px;"></iframe>
+
+        <iframe  src="index_blog.html" frameborder="0" width="100%"
+                scrolling="no" height="1200px;"></iframe>
+
+        <!--联系-->
+        <a id="contact"></a>
+        <iframe id="showHtml" src="index_contact.html" scrolling="auto" frameborder="0"
+                width="100%" height="700;"></iframe>
+
+
+    </div>
+    <!--正文内容结束-->
+
+    <!--页脚开始-->
+    <nav class="hidden-xs hidden-sm navbar footer-nav" role="navigation">
+        <div class="container">
+
+        </div>
+    </nav>
+    <!--页脚结束-->
+
+</div>
+
+<!--  Necessary scripts  -->
+
+<script type="text/javascript" src="angularjs/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="assets/js/owl.carousel.js"></script>
+<script type="text/javascript" src="assets/js/jquery.hoverdir.js"></script>
+
+
+<!-- script for portfolio section using hoverdirection -->
+<script type="text/javascript">
+    $(function () {
+
+        $('.portfolio-item > .item-image').each(function () {
+            $(this).hoverdir({
+                hoverDelay: 75
+            });
+        });
+
+    });
+</script>
+
+
+<!-- script for twitter-feed using owl carousel-->
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#twit").owlCarousel({
+
+            navigation: true, // Show next and prev buttons
+            slideSpeed: 100,
+            paginationSpeed: 400,
+            navigationText: false,
+            singleItem: true,
+            autoPlay: true,
+            pagination: false
+        });
+
+    });
+</script>
+
+
+<!-- script for testimonial section using owl carousel -->
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#client-speech").owlCarousel({
+
+            autoPlay: 5000, //Set AutoPlay to 3 seconds
+            stopOnHover: true,
+            singleItem: true
+        });
+
+    });
+</script>
+
+
+</body>
+</html>

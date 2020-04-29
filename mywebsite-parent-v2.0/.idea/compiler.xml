@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="mywebsite-common" />
+        <module name="mywebsite-manager-web" />
+        <module name="mywebsite-pojo" />
+        <module name="mywebsite-protal-web" />
+        <module name="mywebsite-test" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="mywebsite-content-interface" target="1.8" />
+      <module name="mywebsite-content-service" target="1.8" />
+      <module name="mywebsite-dao" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

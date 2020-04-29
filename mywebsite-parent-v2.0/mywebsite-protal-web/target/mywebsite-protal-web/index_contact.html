@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+
+<html class="no-js"> <!--<![endif]-->
+<head>
+
+    <title>Agency - Contact</title>
+
+    <!-- meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+
+    <!-- stylesheets -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+
+
+    <script src="/angularjs/plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="/angularjs/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/angularjs/plugins/angularjs/angular.min.js"></script>
+    <script src="/angularjs/plugins/angularjs/pagination.js"></script>
+    <script src="/angularjs/js/base.js"></script>
+    <script src="/angularjs/js/controller/baseController.js"></script>
+    <script src="/angularjs/js/controller/contactController.js"></script>
+    <script src="/angularjs/js/service/contactService.js"></script>
+    <script src="/angularjs/js/service/userService.js"></script>
+
+
+    <script>
+
+        function ChangeDisable() {
+
+            var name = document.getElementById('name');
+            var nickName = document.getElementById('nickName');
+            name.setAttribute('readonly', true);
+            nickName.setAttribute('readonly', true);
+        }
+
+        function RemoveDisable() {
+
+            var name = document.getElementById('name');
+            var nickName = document.getElementById('nickName');
+            name.removeAttribute('readonly');
+            nickName.removeAttribute('readonly');
+        }
+
+    </script>
+</head>
+
+<body data-ng-app="mywebsite" ng-controller="contactController">
+
+<div id="contact-page">
+
+
+     <div class="container">
+            <!-- contact-form -->
+            <section class="contact-form">
+
+                <!-- call for contact -->
+                <div class="headline text-center">
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3">
+                            <h2 class="section-title">Say Hello! Don't be shy</h2>
+                            <p class="section-sub-title">
+                                如果你有任何问题或意见，或者只是想打个招呼，
+                                <br/> 请随时与我联系
+                            </p> <!-- /section-sub-title -->
+                        </div>
+                    </div>
+                </div>
+
+                <form method="post">
+
+                    <div class="row">
+                        <div class="col-md-4">
+
+                            <div class="form-group">
+                                <input name="email" type="email" class="form-control" ng-model="entity.email" id="email" required="required" ng-blur="findOneByEmail(entity.email)"
+                                       placeholder="您的邮箱地址">
+                            </div>
+
+                            <div class="form-group">
+                                <input name="name" type="text" ng-model="entity.name" class="form-control" id="name" required="required"
+                                       placeholder="您的姓名">
+                            </div>
+
+                            <div class="form-group">
+                                <input name="nickName" type="text" ng-model="entity.nickName" class="form-control" id="nickName" required="required"
+                                       placeholder="您的昵称">
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-8">
+                            <textarea name="message" ng-model="contact.message" type="text" class="form-control" id="message" rows="8"
+                                      required="required" placeholder="在这里编辑信息"></textarea>
+                        </div>
+                    </div>
+
+                    <button type="button" id="submit" name="submit" class="btn btn-black" ng-click="add()">发送消息</button>
+
+                </form>
+            </section>
+        </div>
+
+</div>
+
+
+</body>
+</html>

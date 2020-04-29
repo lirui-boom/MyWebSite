@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- 页面meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>动态管理</title>
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="../angularjs/plugins/adminLTE/css/AdminLTE.css">
+    <link rel="stylesheet" href="../angularjs/plugins/adminLTE/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="../dist/modules/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../dist/modules/ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="../dist/modules/fontawesome/web-fonts-with-css/css/fontawesome-all.min.css">
+
+    <link rel="stylesheet" href="../dist/modules/summernote/summernote-lite.css">
+    <link rel="stylesheet" href="../dist/modules/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="../dist/css/demo.css">
+    <link rel="stylesheet" href="../dist/css/style.css">
+    <link rel="stylesheet" href="../dist/modules/toastr/build/toastr.min.css">
+
+    <script src="/angularjs/plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="/angularjs/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/angularjs/plugins/angularjs/angular.min.js"></script>
+    <script src="/angularjs/plugins/angularjs/pagination.js"></script>
+    <script src="/angularjs/js/base.js"></script>
+    <script src="/angularjs/js/controller/baseController.js"></script>
+    <script src="/angularjs/js/controller/trendsController.js"></script>
+    <script src="/angularjs/js/service/trendsService.js"></script>
+    <script src="/angularjs/js/service/uploadImgService.js"></script>
+
+    <!-- 富文本编辑器 -->
+    <link rel="stylesheet" href="../angularjs/plugins/kindeditor/themes/default/default.css"/>
+    <script charset="utf-8" src="../angularjs/plugins/kindeditor/kindeditor-min.js"></script>
+    <script charset="utf-8" src="../angularjs/plugins/kindeditor/lang/zh_CN.js"></script>
+    <script type="text/javascript">
+        var editor;
+        KindEditor.ready(function (K) {
+            editor = K.create('textarea[name="content"]', {
+                allowFileManager: true
+            });
+        });
+    </script>
+
+</head>
+
+<body class="hold-transition skin-red sidebar-mini" data-ng-app="mywebsite" ng-controller="trendsController"
+      ng-init="findCategory();search()">
+
+<!-- 内容区域 -->
+<div class="main-content">
+    <section class="section">
+        <h1 class="section-header">
+            <div>动态管理</div>
+        </h1>
+
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-6">
+                <div class="card" style="width: 205%">
+
+                    <div class="card-header">
+                        <div class="float-right">
+                            <form>
+                                <div class="input-group">
+
+                                    标题：<input ng-model="searchEntity.title"
+                                              style="height: 100%;align-self: center">&nbsp;&nbsp;&nbsp;&nbsp;
+                                    &nbsp;&nbsp;
+                                    状态： &nbsp;&nbsp;<input id="all" checked="checked" ng-model="searchEntity.status"
+                                                           type="radio"
+                                                           name="radio1" value="" style="align-self: center"><label
+                                        for="all">全部</label>
+                                    &nbsp;&nbsp;<input id="unactive" ng-model="searchEntity.status" type="radio"
+                                                       name="radio1"
+                                                       value="0" style="align-self: center"><label
+                                        for="unactive">草稿</label>
+                                    &nbsp;&nbsp;<input id="uncheck" ng-model="searchEntity.status" type="radio"
+                                                       name="radio1"
+                                                       value="1" style="align-self: center"><label
+                                        for="uncheck">已发表</label>
+                                    &nbsp;&nbsp; &nbsp;&nbsp;
+                                    <div class="input-group-btn">
+                                        <a href="#" class="btn btn-action btn-secondary"
+                                           ng-click="searchEntity.pageNum=1;search();">
+                                            <i class="ion ion-search">查询</i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <a href="#" class="btn btn-info" data-toggle="modal" data-target="#editModal"
+                           ng-click="clearTable();add()">新建</a>
+                        <a href="#" class="btn btn-info" ng-click="deleteIds()">删除</a>
+                        <a href="#" class="btn btn-info" ng-click="updateStatusIds('1')">发表</a>
+                        <a href="#" class="btn btn-info" ng-click="updateStatusIds('0')">设为草稿</a>
+                        <a href="#" class="btn btn-info" ng-click="reload()">刷新</a>
+
+                    </div>
+
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" style="text-align: center">
+                                <tr>
+                                    <th style="padding-right:0px">
+                                        <input type="checkbox">
+                                    </th>
+                                    <th>id</th>
+                                    <th>标题</th>
+                                    <th>描述</th>
+                                    <th>更新日期</th>
+                                    <th>状态</th>
+                                    <th colspan="2">操作</th>
+                                </tr>
+                                <tr ng-repeat=" pojo in resultEntityList">
+                                    <td style="padding-right:0px">
+                                        <input type="checkbox" ng-click="updateSelection(pojo.id)">
+                                    </td>
+                                    <td>{{pojo.id}}</td>
+                                    <td>{{pojo.title}}</td>
+                                    <td>{{pojo.trendsDesc}}</td>
+                                    <td>{{pojo.updated}}</td>
+                                    <td>
+                                        <div class="badge badge-success">{{statusList[pojo.status*1]}}</div>
+                                    </td>
+                                    <td><a href="#" class="btn btn-action btn-secondary" ng-click="deleteById(pojo.id)">删除</a>
+                                    </td>
+                                    <td><a href="#" class="btn btn-action btn-secondary" data-toggle="modal"
+                                           data-target="#editModal" ng-click="findOneById(pojo.id)">修改</a></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card-footer text-right">
+                        <nav class="d-inline-block">
+                            <ul class="pagination mb-0">
+
+
+                                <li class="page-item {{isFirstPage()?'disabled':''}}">
+                                    <a class="page-link" href="#" tabindex="-1"
+                                       ng-click="queryByPage(resultMap.pageNum-1)"><i
+                                            class="ion ion-chevron-left"></i></a>
+                                </li>
+
+                                <li ng-repeat=" page in pageLabel"
+                                    class="page-item {{page==searchEntity.pageNum?'active':''}}">
+                                    <a class="page-link" href="#" ng-click="queryByPage(page)">{{page}}
+                                        <span class="sr-only">(current)</span>
+                                    </a>
+                                </li>
+
+
+                                <li class="page-item {{isEndPage()?'disabled':''}}">
+                                    <a class="page-link" href="#" ng-click="queryByPage(resultMap.pageNum+1)">
+                                        <i class="ion ion-chevron-right"></i>
+                                    </a>
+                                </li>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <div style="align-self: center">
+                                    <span>共{{resultMap.totalPages}}页,&nbsp;总计{{resultMap.total}}条记录</span>
+                                </div>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<!-- 内容区域 -->
+
+
+<!-- 编辑窗口 -->
+<div class="modal fade" style="margin-top: 10%" id="editModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 id="myModalLabel">动态编辑</h4>
+            </div>
+            <div class="modal-body">
+
+                <form method="POST">
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <label for="title">标题</label>
+                            <input id="title" ng-model="tableEntity.title" type="text" class="form-control" autofocus>
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="blogDesc">描述</label>
+                            <input id="blogDesc" ng-model="tableEntity.blogDesc" class="form-control"/>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <label>封面</label>
+                            <div class="form-control">
+                                <img ng-if="tableEntity.picUrl!=null" id="tableImg" ng-src="{{tableEntity.picUrl}}"
+                                     style="max-width:200px;max-height:200px;border:1px;"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-6">
+                            <label>封面上传</label>
+
+                            <div style="margin-top: 30%">
+                                <input type="file" id="file"/><br/><br/>
+                                <button class="btn btn-outline-info" style="margin-left: 10%" ng-click="uploadImg()">
+                                    上传
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="content">正文内容</label>
+                        <textarea id="content" name="content"
+                                  style="visibility:hidden;width: 100%;height: 400px;"></textarea>
+                    </div>
+
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success" data-dismiss="modal" aria-hidden="true" ng-click="save()">保存</button>
+                <button class="btn btn-default" data-dismiss="modal" aria-hidden="true" onclick="close()">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+
+</script>
+
+<script src="../dist/modules/jquery.min.js"></script>
+<script src="../dist/modules/popper.js"></script>
+<script src="../dist/modules/tooltip.js"></script>
+<script src="../dist/modules/bootstrap/js/bootstrap.min.js"></script>
+<script src="../dist/modules/nicescroll/jquery.nicescroll.min.js"></script>
+<script src="../dist/modules/scroll-up-bar/dist/scroll-up-bar.min.js"></script>
+<script src="../dist/js/sa-functions.js"></script>
+
+<script src="../dist/modules/chart.min.js"></script>
+<script src="../dist/modules/summernote/summernote-lite.js"></script>
+
+<script src="../dist/js/custom.js"></script>
+<script src="../dist/js/demo.js"></script>
+<script src="../dist/modules/toastr/build/toastr.min.js"></script>
+
+</body>
+
+</html>
