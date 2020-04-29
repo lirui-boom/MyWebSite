@@ -39,7 +39,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     //SpringSecurity配置信息
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/login.html", "/item.html", "/register.html", "/registerinfo.html", "/dist/**", "/templates/**", "/templates/**", "/angularjs/**", "/admin/add", "/active", "/forgot.html", "/admin/findOneByEmail", "/admin/sendPasswordEmail", "/admin/updatePassword", "/active.html","/error.html").permitAll()
+                .antMatchers("/login.html", "/item.html", "/register.html", "/registerinfo.html", "/dist/**", "/templates/**", "/angularjs/**", "/admin/add", "/active", "/forgot.html", "/admin/findOneByEmail", "/admin/sendPasswordEmail", "/admin/updatePassword", "/active.html","/error.html").permitAll()
                 .antMatchers("/**").hasAnyRole("ADMIN")
                 .anyRequest()
                 .authenticated()

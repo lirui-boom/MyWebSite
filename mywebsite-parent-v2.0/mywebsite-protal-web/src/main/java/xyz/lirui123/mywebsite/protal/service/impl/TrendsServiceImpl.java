@@ -68,7 +68,6 @@ public class TrendsServiceImpl implements TrendsService {
             criteria.andStatusEqualTo(tbTrends.getStatus());
         }
 
-
         Page page = (Page) tbTrendsMapper.selectByExample(example);
         PageResult result = new PageResult(page.getTotal(), page.getResult());
         return ResponseResult.ok(result);

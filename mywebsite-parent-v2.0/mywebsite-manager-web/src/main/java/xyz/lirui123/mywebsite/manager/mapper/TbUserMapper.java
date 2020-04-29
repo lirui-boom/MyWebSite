@@ -1,11 +1,10 @@
 package xyz.lirui123.mywebsite.manager.mapper;
 
+import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 import xyz.lirui123.mywebsite.pojo.TbUser;
 import xyz.lirui123.mywebsite.pojo.TbUserExample;
-
-import java.util.List;
 
 @Component
 public interface TbUserMapper {

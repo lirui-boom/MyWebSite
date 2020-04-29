@@ -15,7 +15,7 @@ app.controller('loginController', function ($scope,$controller,loginService) {
 
             $scope.msg = "";
 
-            if (data.status != 200) {
+            if (data.status != null && data.status != undefined && data.status != 200) {
                 $scope.msg = data.msg;
             }
 

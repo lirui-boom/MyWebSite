@@ -411,8 +411,8 @@ public class AdminServiceImpl implements AdminService {
     private void sendReEmailTo(TbAdmin admin,String token){
 
         String time =  "</br>" + DateUtil.getNowTime();
-        String content = admin.getAdmin() + "您好:</br>" + TOKEN_PASSWORD_CONTENT + "</br>您的验证码是：" + token + "，十分钟内有效，请在有效时间内使用。" + time;
-        MailUtils.sendMail(admin.getEmail(), content, TOKEN_PASSWORD_TITLE);
+        String content = admin.getAdmin() + "您好:</br>" + TOKEN_REEMAIL_CONTENT + "</br>您的验证码是：" + token + "，十分钟内有效，请在有效时间内使用。" + time;
+        MailUtils.sendMail(admin.getEmail(), content, TOKEN_REEMAIL_TITLE);
     }
 
 

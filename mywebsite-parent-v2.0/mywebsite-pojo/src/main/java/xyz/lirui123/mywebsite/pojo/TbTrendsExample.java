@@ -396,73 +396,73 @@ public class TbTrendsExample implements Serializable {
             return (Criteria) this;
         }
 
-        public Criteria andTremdsDescIsNull() {
-            addCriterion("tremds_desc is null");
+        public Criteria andTrendsDescIsNull() {
+            addCriterion("trends_desc is null");
             return (Criteria) this;
         }
 
-        public Criteria andTremdsDescIsNotNull() {
-            addCriterion("tremds_desc is not null");
+        public Criteria andTrendsDescIsNotNull() {
+            addCriterion("trends_desc is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTremdsDescEqualTo(String value) {
-            addCriterion("tremds_desc =", value, "tremdsDesc");
+        public Criteria andTrendsDescEqualTo(String value) {
+            addCriterion("trends_desc =", value, "trendsDesc");
             return (Criteria) this;
         }
 
-        public Criteria andTremdsDescNotEqualTo(String value) {
-            addCriterion("tremds_desc <>", value, "tremdsDesc");
+        public Criteria andTrendsDescNotEqualTo(String value) {
+            addCriterion("trends_desc <>", value, "trendsDesc");
             return (Criteria) this;
         }
 
-        public Criteria andTremdsDescGreaterThan(String value) {
-            addCriterion("tremds_desc >", value, "tremdsDesc");
+        public Criteria andTrendsDescGreaterThan(String value) {
+            addCriterion("trends_desc >", value, "trendsDesc");
             return (Criteria) this;
         }
 
-        public Criteria andTremdsDescGreaterThanOrEqualTo(String value) {
-            addCriterion("tremds_desc >=", value, "tremdsDesc");
+        public Criteria andTrendsDescGreaterThanOrEqualTo(String value) {
+            addCriterion("trends_desc >=", value, "trendsDesc");
             return (Criteria) this;
         }
 
-        public Criteria andTremdsDescLessThan(String value) {
-            addCriterion("tremds_desc <", value, "tremdsDesc");
+        public Criteria andTrendsDescLessThan(String value) {
+            addCriterion("trends_desc <", value, "trendsDesc");
             return (Criteria) this;
         }
 
-        public Criteria andTremdsDescLessThanOrEqualTo(String value) {
-            addCriterion("tremds_desc <=", value, "tremdsDesc");
+        public Criteria andTrendsDescLessThanOrEqualTo(String value) {
+            addCriterion("trends_desc <=", value, "trendsDesc");
             return (Criteria) this;
         }
 
-        public Criteria andTremdsDescLike(String value) {
-            addCriterion("tremds_desc like", value, "tremdsDesc");
+        public Criteria andTrendsDescLike(String value) {
+            addCriterion("trends_desc like", value, "trendsDesc");
             return (Criteria) this;
         }
 
-        public Criteria andTremdsDescNotLike(String value) {
-            addCriterion("tremds_desc not like", value, "tremdsDesc");
+        public Criteria andTrendsDescNotLike(String value) {
+            addCriterion("trends_desc not like", value, "trendsDesc");
             return (Criteria) this;
         }
 
-        public Criteria andTremdsDescIn(List<String> values) {
-            addCriterion("tremds_desc in", values, "tremdsDesc");
+        public Criteria andTrendsDescIn(List<String> values) {
+            addCriterion("trends_desc in", values, "trendsDesc");
             return (Criteria) this;
         }
 
-        public Criteria andTremdsDescNotIn(List<String> values) {
-            addCriterion("tremds_desc not in", values, "tremdsDesc");
+        public Criteria andTrendsDescNotIn(List<String> values) {
+            addCriterion("trends_desc not in", values, "trendsDesc");
             return (Criteria) this;
         }
 
-        public Criteria andTremdsDescBetween(String value1, String value2) {
-            addCriterion("tremds_desc between", value1, value2, "tremdsDesc");
+        public Criteria andTrendsDescBetween(String value1, String value2) {
+            addCriterion("trends_desc between", value1, value2, "trendsDesc");
             return (Criteria) this;
         }
 
-        public Criteria andTremdsDescNotBetween(String value1, String value2) {
-            addCriterion("tremds_desc not between", value1, value2, "tremdsDesc");
+        public Criteria andTrendsDescNotBetween(String value1, String value2) {
+            addCriterion("trends_desc not between", value1, value2, "trendsDesc");
             return (Criteria) this;
         }
 

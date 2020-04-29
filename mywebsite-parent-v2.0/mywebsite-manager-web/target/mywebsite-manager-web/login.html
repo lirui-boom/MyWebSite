@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" name="viewport">
-  <title>Login &mdash; LiLei</title>
+  <title>Login &mdash; LiRui</title>
 
   <link rel="stylesheet" href="dist/modules/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="dist/modules/ionicons/css/ionicons.min.css">
@@ -29,7 +29,7 @@
         <div class="row">
           <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
             <div class="login-brand">
-              LiLei
+              LiRui
             </div>
 
             <div class="card card-primary">
@@ -39,7 +39,7 @@
                 <form class="needs-validation" novalidate="" action="/login" method="post">
                   <div class="form-group">
                     <label>用户名</label>
-                    <input   class="form-control" name="username" tabindex="1" required autofocus>
+                    <input  ng-model="entity.username" class="form-control" name="username" tabindex="1" required autofocus>
                     <div class="invalid-feedback">
                       请填写用户名
                     </div>
@@ -67,7 +67,7 @@
                   </div>
 
                   <div class="form-group">
-                    <button  class="btn btn-primary btn-block" tabindex="4" type="submit">
+                    <button  class="btn btn-primary btn-block" tabindex="4" ng-click="login()">
                       登陆
                     </button>
                   </div>
@@ -82,7 +82,7 @@
               没有账户? <a href="register.html">创建一个</a>
             </div>
             <div class="simple-footer">
-              Copyright &copy; LiLei 2020
+              Copyright &copy; LiRui 2020
             </div>
           </div>
         </div>

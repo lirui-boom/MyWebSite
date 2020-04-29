@@ -1,11 +1,10 @@
 package xyz.lirui123.mywebsite.protal.mapper;
 
+import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 import xyz.lirui123.mywebsite.pojo.TbTrends;
 import xyz.lirui123.mywebsite.pojo.TbTrendsExample;
-
-import java.util.List;
 
 @Component
 public interface TbTrendsMapper {
