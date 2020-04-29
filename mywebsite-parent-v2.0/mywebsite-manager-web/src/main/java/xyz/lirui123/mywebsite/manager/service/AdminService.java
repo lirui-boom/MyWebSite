@@ -82,7 +82,7 @@ public interface AdminService extends UserDetailsService {
     public abstract ResponseResult updateStatusIds(Long[] ids, String status);
 
     /**
-     * 修改用户名
+     * 修改密码
      * @param admin
      * @return
      */

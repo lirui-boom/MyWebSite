@@ -36,17 +36,13 @@ public class AdminController {
      * @return
      */
     @RequestMapping("/active")
-    @ResponseBody
-    public ModelAndView active(Long id, String token) {
+    public String active(Long id, String token) {
 
         ResponseResult result = adminService.active(id, token);
-        ModelAndView mav = new ModelAndView();
         if (result.getStatus() == 200) {
-            mav.setViewName("active");
-        }else {
-            mav.setViewName("error");
+            return "redirect:/active.html";
         }
-        return mav;
+        return "redirect:/error.html";
     }
 
     /**

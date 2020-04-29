@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,8 @@ import xyz.lirui123.mywebsite.utils.TokenUtils;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 @PropertySource(value = {"classpath:properties/DefaultPicPath.properties","classpath:properties/TokenMail.properties"}, encoding = "utf-8")
 @Service
@@ -48,6 +51,9 @@ public class AdminServiceImpl implements AdminService {
     @Autowired
     private TbAdminMapper tbAdminMapper;
 
+
+    @Autowired
+    private RedisTemplate redisTemplate;
     /**
      * 根据用户名查询用户
      * @param admin
@@ -116,7 +122,7 @@ public class AdminServiceImpl implements AdminService {
 
         admin.setCreated(new Date());
         admin.setPassword(BCryptUtil.encode(admin.getPassword()));//加密
-        admin.setToken(TokenUtils.getToken());
+        admin.setToken(UUID.randomUUID().toString().replace("-","").substring(0,15));
         admin.setStatus("-1");
         admin.setEmail(admin.getEmail().toLowerCase());//转小写
         admin.setPicUrl(DEFAULT_ADMIN_IMAGE);
@@ -301,13 +307,13 @@ public class AdminServiceImpl implements AdminService {
             return  ResponseResult.build(400, "参数不合法");
         }
 
-        if (!oldAdmin.getToken().equals(admin.getToken())) {
-            return ResponseResult.build(400, "验证码有误");
+        if (!admin.getToken().equals(redisTemplate.boundHashOps("mywebsite-"+oldAdmin.getId()).get("psw-email"))) {
+            return ResponseResult.build(400, "验证码有误或已过期！");
         }
 
         admin.setPassword(BCryptUtil.encode(admin.getPassword()));//加密
-        admin.setToken(null);
         tbAdminMapper.updateByPrimaryKey(admin);
+        redisTemplate.boundHashOps("mywebsite-" + oldAdmin.getId()).delete("psw-email");
 
         return ResponseResult.ok();
     }
@@ -327,10 +333,13 @@ public class AdminServiceImpl implements AdminService {
         }
 
         String token = TokenUtils.getToken();
-        tbAdmin.setToken(token);
-        tbAdminMapper.updateByPrimaryKey(tbAdmin);
+
+        redisTemplate.boundHashOps("mywebsite-" + tbAdmin.getId()).put("psw-email", token);
+        redisTemplate.expire("mywebsite-" + tbAdmin.getId(), 10, TimeUnit.MINUTES);
+
+
         //发送邮箱
-        sendPasswordEmail(tbAdmin);
+        sendPasswordEmail(tbAdmin,token);
 
         return ResponseResult.ok();
     }
@@ -354,15 +363,13 @@ public class AdminServiceImpl implements AdminService {
             return  ResponseResult.build(400, "参数不合法");
         }
 
-        if (!oldAdmin.getToken().equals(admin.getToken())) {
-            return ResponseResult.build(400, "验证码有误");
+        if (!admin.getToken().equals(redisTemplate.boundHashOps("mywebsite-"+oldAdmin.getId()).get("re-email"))) {
+            return ResponseResult.build(400, "验证码有误或已过期！");
         }
 
-        oldAdmin.setToken(null);
         oldAdmin.setEmail(admin.getEmail());
-
         tbAdminMapper.updateByPrimaryKey(oldAdmin);
-
+        redisTemplate.boundHashOps("mywebsite-" + oldAdmin.getId()).delete("re-email");
         return ResponseResult.ok();
     }
 
@@ -386,11 +393,12 @@ public class AdminServiceImpl implements AdminService {
             return ResponseResult.build(400, "参数不合法");
         }
 
-        oldAdmin.setToken(token);
-        tbAdminMapper.updateByPrimaryKey(oldAdmin);
+        redisTemplate.boundHashOps("mywebsite-" + oldAdmin.getId()).put("re-email", token);
+        redisTemplate.expire("mywebsite-" + oldAdmin.getId(), 10, TimeUnit.MINUTES);
+
 
         //发送邮箱
-        sendReEmailTo(oldAdmin);
+        sendReEmailTo(admin, token);
 
         return ResponseResult.ok();
     }
@@ -400,10 +408,10 @@ public class AdminServiceImpl implements AdminService {
      * @param admin
      * @return
      */
-    private void sendReEmailTo(TbAdmin admin){
+    private void sendReEmailTo(TbAdmin admin,String token){
 
         String time =  "</br>" + DateUtil.getNowTime();
-        String content = admin.getAdmin() + "您好:</br>" + TOKEN_PASSWORD_CONTENT + "</br>您的验证码是：" + admin.getToken() + time;
+        String content = admin.getAdmin() + "您好:</br>" + TOKEN_PASSWORD_CONTENT + "</br>您的验证码是：" + token + "，十分钟内有效，请在有效时间内使用。" + time;
         MailUtils.sendMail(admin.getEmail(), content, TOKEN_PASSWORD_TITLE);
     }
 
@@ -412,10 +420,10 @@ public class AdminServiceImpl implements AdminService {
      * 发送密码验证邮箱
      * @param admin
      */
-    private void sendPasswordEmail(TbAdmin admin){
+    private void sendPasswordEmail(TbAdmin admin,String token){
 
         String time =  "</br>" + DateUtil.getNowTime();
-        String content = admin.getAdmin() + "您好:</br>" + TOKEN_PASSWORD_CONTENT + "</br>您的验证码是：" + admin.getToken() + time;
+        String content = admin.getAdmin() + "您好:</br>" + TOKEN_PASSWORD_CONTENT + "</br>您的验证码是：" + token + ",十分钟内有效，请在有效时间内使用。"+ time;
         MailUtils.sendMail(admin.getEmail(), content, TOKEN_PASSWORD_TITLE);
     }
 
@@ -425,8 +433,8 @@ public class AdminServiceImpl implements AdminService {
      */
     private void sendTokenMail(TbAdmin admin){
 
-        String url = TOKEN_REGISTER_URL + "active.do?id=" + admin.getId() + "&token=" + admin.getToken();
-        String msg = "<a href='" + url + "'>点击此链接或复制链接到地址栏，访问该地址以激活账号</a>";
+        String url = TOKEN_REGISTER_URL + "active?id=" + admin.getId() + "&token=" + admin.getToken();
+        String msg = "<a href='" + url + "'>点击此链接或复制链接到地址栏，访问该地址以激活账号:" +url+ "</a>";
         String time =  "</br>" + DateUtil.getNowTime();
         MailUtils.sendMail(admin.getEmail(),admin.getAdmin() + "您好:</br>"  + TOKEN_REGISTER_CONTENT + msg + time,TOKEN_REGISTER_TITLE);
     }

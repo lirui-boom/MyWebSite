@@ -16,6 +16,7 @@ xyz\lirui123\mywebsite\manager\service\UserService.class
 xyz\lirui123\mywebsite\manager\controller\AdminController.class
 xyz\lirui123\mywebsite\manager\controller\CommentController.class
 xyz\lirui123\mywebsite\manager\service\CommentService.class
+xyz\lirui123\mywebsite\manager\config\MyAuthenticationFailHandler.class
 xyz\lirui123\mywebsite\manager\controller\LoginController.class
 xyz\lirui123\mywebsite\manager\controller\TrendsController.class
 xyz\lirui123\mywebsite\manager\config\WebSecurityConfig.class

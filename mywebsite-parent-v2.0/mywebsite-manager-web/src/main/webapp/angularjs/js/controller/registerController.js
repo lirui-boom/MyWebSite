@@ -34,7 +34,7 @@ app.controller("registerController", function ($scope,$controller,registerServic
 
                 if (data.status == 200) {
                     $scope.errorMsg = null;
-                    alert("注册成功！");
+                    alert("注册成功，请注意邮箱信息并激活邮箱！");
                     location.href = '/registinfo.html';
                 }else {
                     $scope.errorMsg = data.msg;

@@ -149,6 +149,11 @@
       #{password,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
       #{picUrl,jdbcType=VARCHAR}, #{token,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
       #{created,jdbcType=TIMESTAMP})
+
+    <selectKey keyProperty="id" resultType="Long" order="AFTER">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+
   </insert>
   <insert id="insertSelective" parameterType="xyz.lirui123.mywebsite.pojo.TbAdmin" >
     <!--
