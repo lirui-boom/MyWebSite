@@ -2,6 +2,7 @@ xyz\lirui123\mywebsite\utils\FileUtil.class
 xyz\lirui123\mywebsite\utils\QiniuCloudUtil.class
 xyz\lirui123\mywebsite\response\ResponseResult.class
 xyz\lirui123\mywebsite\utils\DateUtil.class
+xyz\lirui123\mywebsite\utils\AliyunEmailUtil.class
 xyz\lirui123\mywebsite\utils\MailUtils.class
 xyz\lirui123\mywebsite\utils\MailUtils$1.class
 xyz\lirui123\mywebsite\utils\TokenUtils.class

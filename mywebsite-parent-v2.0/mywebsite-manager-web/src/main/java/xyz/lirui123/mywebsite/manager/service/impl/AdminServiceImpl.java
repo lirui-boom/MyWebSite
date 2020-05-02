@@ -16,10 +16,7 @@ import xyz.lirui123.mywebsite.pojo.TbAdminExample;
 import xyz.lirui123.mywebsite.response.PageResult;
 import xyz.lirui123.mywebsite.response.ResponseResult;
 import xyz.lirui123.mywebsite.manager.service.AdminService;
-import xyz.lirui123.mywebsite.utils.BCryptUtil;
-import xyz.lirui123.mywebsite.utils.DateUtil;
-import xyz.lirui123.mywebsite.utils.MailUtils;
-import xyz.lirui123.mywebsite.utils.TokenUtils;
+import xyz.lirui123.mywebsite.utils.*;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -412,7 +409,7 @@ public class AdminServiceImpl implements AdminService {
 
         String time =  "</br>" + DateUtil.getNowTime();
         String content = admin.getAdmin() + "您好:</br>" + TOKEN_REEMAIL_CONTENT + "</br>您的验证码是：" + token + "，十分钟内有效，请在有效时间内使用。" + time;
-        MailUtils.sendMail(admin.getEmail(), content, TOKEN_REEMAIL_TITLE);
+        AliyunEmailUtil.sendSampleEmail(admin.getEmail(), content, TOKEN_REEMAIL_TITLE);
     }
 
 
@@ -424,7 +421,7 @@ public class AdminServiceImpl implements AdminService {
 
         String time =  "</br>" + DateUtil.getNowTime();
         String content = admin.getAdmin() + "您好:</br>" + TOKEN_PASSWORD_CONTENT + "</br>您的验证码是：" + token + ",十分钟内有效，请在有效时间内使用。"+ time;
-        MailUtils.sendMail(admin.getEmail(), content, TOKEN_PASSWORD_TITLE);
+        AliyunEmailUtil.sendSampleEmail(admin.getEmail(), content, TOKEN_PASSWORD_TITLE);
     }
 
     /**
@@ -436,7 +433,7 @@ public class AdminServiceImpl implements AdminService {
         String url = TOKEN_REGISTER_URL + "active?id=" + admin.getId() + "&token=" + admin.getToken();
         String msg = "<a href='" + url + "'>点击此链接或复制链接到地址栏，访问该地址以激活账号:" +url+ "</a>";
         String time =  "</br>" + DateUtil.getNowTime();
-        MailUtils.sendMail(admin.getEmail(),admin.getAdmin() + "您好:</br>"  + TOKEN_REGISTER_CONTENT + msg + time,TOKEN_REGISTER_TITLE);
+        AliyunEmailUtil.sendSampleEmail(admin.getEmail(),admin.getAdmin() + "您好:</br>"  + TOKEN_REGISTER_CONTENT + msg + time,TOKEN_REGISTER_TITLE);
     }
 
     @Override
